@@ -2,13 +2,25 @@ import pandas as pd
 import turtle 
 from turtle import Turtle 
 
+# create window 
 screen = turtle.Screen()
 screen.title("U.S. States Game")
 image = "./blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
+# -------------------------------- State Coordinates ----------------------------------------- #
+# get coordinates of states 
 
+def get_mouse_click_cor(x, y):
+    print(x, y)
+# click on different areas on turtle window in order to recieve x, y coordinates.     
+# turtle.onscreenclick(get_mouse_click_cor) <<<---- uncomment if starting blank  
+
+
+# ------------------------Generate state labels and coordinates list ------------------------- # 
+
+# generate text on window based on user input 
 class State(Turtle):
     def __init__(self, answer,coordinates):
         """create a turtle text object with the answer if correct using name of state and tuple of coordinates"""
@@ -25,11 +37,20 @@ data = pd.read_csv('./50_states.csv')
 states_list = data.state.to_list()
 # get a tuple of x, y value from dataframe
 data['coordinates'] = list(zip(data.x, data.y))
+# list of all coordinates 
 coordinates_list = data.coordinates.to_list()
+
+
+# ------------------------------- Game Play -------------------------------------------------- #
+
+# store guessed states 
 guessed_states = []
 game_on = True
+# count correct guessed states
 correct = 0  
+# prompt user to guess state
 answer = screen.textinput(title=f"Guess a state {correct}/50", prompt = "Type a name of state.")
+
 while game_on: 
     if answer.title() in states_list:
         # get the index of the state in order to match with correct coordinates tuple 
@@ -53,10 +74,4 @@ while game_on:
 print(len(unguessed_states))
 screen.mainloop()
 
-
-# get coordinates of states 
-# def get_mouse_click_cor(x, y):
-#     print(x, y)
-
-# turtle.onscreenclick(get_mouse_click_cor)
 
