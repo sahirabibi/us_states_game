@@ -71,6 +71,7 @@ while game_on:
         answer = screen.textinput(title=f"Guess a state{correct}/50", prompt = "Type a name of state.")
 
 
+# print list of all unguessed states after game over
 print(len(unguessed_states))
 screen.mainloop()
 
